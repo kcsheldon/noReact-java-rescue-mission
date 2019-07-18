@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Answer Form</title>
+</head>
+<body>
+<h2>Please Enter your Answer to a Question</h2>
+
+<h5 th:text="'Question title: ' + ${question.title}"></h5>
+
+<div th:object="${question}">
+  <p th:text="'Id: ' + *{id}"></p>
+  <p th:text="'Date: ' + *{questionTimeStamp}"></p>
+  <p th:text="'Description: ' + *{description}"></p>
+
+
+<form action="#" th:action="@{'/answers/' + ${question.id}}" method="POST" th:object="${answer}">
+
+
+    <label for="answerdescription">Answer</label>
+    <textarea type="text" id="answerdescription" th:field="*{answerDescription}">
+    </textarea>
+    <p th:errors="*{answerDescription}"></p>
+
+
+  <input type="submit" value="Submit">
+
+</form>
+</div>
+</body>
+</html>

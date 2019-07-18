@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Individual Party Page</title>
+</head>
+<body>
+<h1>Question and Answer Page</h1>
+
+
+<h5 th:text="${question.title}"></h5>
+
+  <div th:object="${question}">
+    <p th:text="'Id: ' + *{id}"></p>
+    <p th:text="'Date: ' + *{questionTimeStamp}"></p>
+    <p th:text="'Description: ' + *{description}"></p>
+  </div>
+
+<!-- Add list of answers here -->
+<h2>List of Answers to this Question</h2>
+
+<!--
+<div th:object="${answer}">
+  <li th:text="*{answerDescription} + ' '
+      + *{#dates.monthName(answerTimeStamp)} + ' '
+      + *{#dates.day(answerTimeStamp)} + ', '
+      + *{#dates.year(answerTimeStamp)} + ', '
+      + *{#dates.hour(answerTimeStamp)} + ':'
+      + *{#dates.minute(answerTimeStamp)}"></span>
+  </li>
+</div>
+-->
+<ul>
+  <div th:each="answer : ${answers}">
+    <div th:object="${answer}">
+      <li th:text="*{answerDescription} + ' '
+      + *{#dates.monthName(answerTimeStamp)} + ' '
+      + *{#dates.day(answerTimeStamp)} + ', '
+      + *{#dates.year(answerTimeStamp)} + ', '
+      + *{#dates.hour(answerTimeStamp)} + ':'
+      + *{#dates.minute(answerTimeStamp)}"></span>
+      </li>
+    </div>
+  </div>
+</ul>
+<a th:href="@{'/questions/new'}" th:text="'Add a new Question'"></a>
+<a th:href="@{'/questions/index'}" th:text="'Go to Question List'"></a>
+<a th:href="@{'/answers/new/' + ${question.id}}" th:text="'Answer this Question'"></a>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Questions</title>
+</head>
+<body>
+<h2>List of Questions</h2>
+<ul>
+  <div th:each="question : ${questions}">
+    <div th:object="${question}">
+      <li>
+        <a th:href="@{'/questions/' + *{id}}" th:text="*{title} + ' '"></a>
+        <span th:text="*{#dates.monthName(questionTimeStamp)} + ' '
+        + *{#dates.day(questionTimeStamp)} + ', '
+        + *{#dates.year(questionTimeStamp)} + ', '
+        + *{#dates.hour(questionTimeStamp)} + ':'
+        + *{#dates.minute(questionTimeStamp)}"></span>
+    </li>
+    </div>
+    </div>
+  </div>
+</ul>
+
+<h2>List of Questions Descending Order</h2>
+<ul>
+  <div th:each="question : ${dordered}">
+    <div th:object="${question}">
+      <li th:text="*{title} + ' '
+      + *{#dates.monthName(questionTimeStamp)} + ' '
+      + *{#dates.day(questionTimeStamp)} + ', '
+      + *{#dates.year(questionTimeStamp)} + ', '
+      + *{#dates.hour(questionTimeStamp)} + ':'
+      + *{#dates.minute(questionTimeStamp)}"></span>
+      </li>
+    </div>
+  </div>
+</ul>
+<a th:href="@{'/questions/new'}" th:text="'Add a new Question'"></a>
+</body>
+</html>
